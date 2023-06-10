@@ -1,0 +1,142 @@
+definitions:
+  services:
+    docker:
+      memory: 3072
+  caches:
+    sonar: .sonar/cache
+  steps:
+    - step: &build-dev
+        name: Build frontend
+        image: node:20
+        deployment: dev
+        script:
+          # Generate configuration files
+          - apt-get update && apt-get -y install gettext-base
+          - /usr/bin/envsubst < .env.template > .env
+          - /usr/bin/envsubst '$BITBUCKET_COMMIT' < nginx.template.conf > nginx.conf
+          # Build
+          - npm install
+          - VITE_PROJECT_TYPE=user npm run build && mv dist dist-user
+          - VITE_PROJECT_TYPE=admin npm run build && mv dist dist-admin
+        artifacts:
+          - dist-user/**
+          - dist-admin/**
+          - nginx.conf
+        caches:
+          - node
+
+    - step: &push-run-dev
+        name: Run container
+        image: google/cloud-sdk:alpine
+        services:
+          - docker
+        caches:
+          - docker
+        script:
+          # Extract Google Cloud API Key
+          - echo $DEV_GCLOUD_API_KEYFILE | base64 -d > ./gcloud-api-key.json
+          # Authenticate
+          - cat ./gcloud-api-key.json | docker login -u _json_key --password-stdin https://gcr.io
+          - gcloud auth activate-service-account --key-file gcloud-api-key.json
+          # Build and deploy USER
+          - rm -rf dist && mv dist-user dist
+          - export IMAGE_NAME_USER=gcr.io/$DEV_GCLOUD_PROJECT/$BITBUCKET_REPO_SLUG:$BITBUCKET_COMMIT-$BITBUCKET_BRANCH-user
+          - docker build -t ${IMAGE_NAME_USER} . && docker push ${IMAGE_NAME_USER}
+          - gcloud run deploy $BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH-user --platform=managed --allow-unauthenticated --image=$IMAGE_NAME_USER --memory=$GCLOUD_RUN_MEMORY --timeout=$GCLOUD_RUN_TIMEOUT --region=$GCLOUD_RUN_REGION --max-instances=$GCLOUD_RUN_MAX_INSTANCES --project=$DEV_GCLOUD_PROJECT
+          # Build and deploy ADMIN
+          - rm -rf dist && mv dist-admin dist
+          - export IMAGE_NAME_ADMIN=gcr.io/$DEV_GCLOUD_PROJECT/$BITBUCKET_REPO_SLUG:$BITBUCKET_COMMIT-$BITBUCKET_BRANCH-admin
+          - docker build -t ${IMAGE_NAME_ADMIN} . && docker push ${IMAGE_NAME_ADMIN}
+          - gcloud run deploy $BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH-admin --platform=managed --allow-unauthenticated --image=$IMAGE_NAME_ADMIN --memory=$GCLOUD_RUN_MEMORY --timeout=$GCLOUD_RUN_TIMEOUT --region=$GCLOUD_RUN_REGION --max-instances=$GCLOUD_RUN_MAX_INSTANCES --project=$DEV_GCLOUD_PROJECT
+
+    - step: &build-prod
+        name: Build frontend
+        image: node:20
+        deployment: prod
+        script:
+          # Generate configuration files
+          - apt-get update && apt-get -y install gettext-base
+          - /usr/bin/envsubst < .env.template > .env
+          - /usr/bin/envsubst '$BITBUCKET_COMMIT' < nginx.template.conf > nginx.conf
+          # Build
+          - npm install
+          - VITE_PROJECT_TYPE=user npm run build && mv dist dist-user
+          - VITE_PROJECT_TYPE=admin npm run build && mv dist dist-admin
+        artifacts:
+          - dist-user/**
+          - dist-admin/**
+          - nginx.conf
+        caches:
+          - node
+
+    - step: &push-run-prod
+        name: Run container
+        image: google/cloud-sdk:alpine
+        services:
+          - docker
+        caches:
+          - docker
+        script:
+          # Extract Google Cloud API Key
+          - echo $PROD_GCLOUD_API_KEYFILE | base64 -d > ./gcloud-api-key.json
+          # Authenticate
+          - cat ./gcloud-api-key.json | docker login -u _json_key --password-stdin https://gcr.io
+          - gcloud auth activate-service-account --key-file gcloud-api-key.json
+          # Build and deploy USER
+          - rm -rf dist && mv dist-user dist
+          - export IMAGE_NAME_USER=gcr.io/$PROD_GCLOUD_PROJECT/$BITBUCKET_REPO_SLUG:$BITBUCKET_COMMIT-$BITBUCKET_BRANCH-user
+          - docker build -t ${IMAGE_NAME_USER} . && docker push ${IMAGE_NAME_USER}
+          - gcloud run deploy $BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH-user --platform=managed --allow-unauthenticated --image=$IMAGE_NAME_USER --memory=$GCLOUD_RUN_MEMORY --timeout=$GCLOUD_RUN_TIMEOUT --region=$GCLOUD_RUN_REGION --max-instances=$GCLOUD_RUN_MAX_INSTANCES --project=$PROD_GCLOUD_PROJECT
+          # Build and deploy ADMIN
+          - rm -rf dist && mv dist-admin dist
+          - export IMAGE_NAME_ADMIN=gcr.io/$PROD_GCLOUD_PROJECT/$BITBUCKET_REPO_SLUG:$BITBUCKET_COMMIT-$BITBUCKET_BRANCH-admin
+          - docker build -t ${IMAGE_NAME_ADMIN} . && docker push ${IMAGE_NAME_ADMIN}
+          - gcloud run deploy $BITBUCKET_REPO_SLUG-$BITBUCKET_BRANCH-admin --platform=managed --allow-unauthenticated --image=$IMAGE_NAME_ADMIN --memory=$GCLOUD_RUN_MEMORY --timeout=$GCLOUD_RUN_TIMEOUT --region=$GCLOUD_RUN_REGION --max-instances=$GCLOUD_RUN_MAX_INSTANCES --project=$PROD_GCLOUD_PROJECT
+
+    - step: &assure-quality
+        name: Quality assurance
+        image: node:20-slim
+        caches:
+          - node
+        script:
+          # Generate configuration files
+          - apt-get update && apt-get -y install gettext-base
+          - /usr/bin/envsubst < .env.template > .env
+          # Check
+          - npm install
+          - npm run lint-check
+          - npm run ts-check
+          - npm run format-check
+
+    - step: &run-sonarcloud
+        name: Run SonarCloud
+        script:
+          - chmod 777 .sonar -R
+          - pipe: sonarsource/sonarcloud-scan:1.4.0
+            variables:
+              SONAR_SCANNER_OPTS: "-Xmx3072m"
+          - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
+        services:
+          - docker
+        caches:
+          - docker
+          - sonar
+
+clone:
+  depth: 1
+
+pipelines:
+  branches:
+    dev:
+      - step: *assure-quality
+      - step: *build-dev
+      - step: *push-run-dev
+    master:
+      - step: *assure-quality
+      - step: *run-sonarcloud
+      - step: *build-prod
+      - step: *push-run-prod
+  pull-requests:
+    "**":
+      - step: *assure-quality
+      - step: *run-sonarcloud

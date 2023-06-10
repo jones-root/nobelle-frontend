@@ -1,0 +1,211 @@
+{
+  "console.log": {
+    "scope": "javascript,typescript",
+    "prefix": "log",
+    "body": ["console.log($1);"],
+    "description": "Log output to console"
+  },
+  "Generate CrudTable": {
+    "scope": "javascript,typescript,html,vue",
+    "prefix": "crudTable",
+    "body": [
+      "<template>",
+      "<CrudTable",
+      ":headers=\"headers\"",
+      ":crud=\"${TM_FILENAME_BASE/(.*)Table/${1:/camelcase}/}Crud\"",
+      "accessible-table-description=\"$1\"",
+      "/>",
+      "</template>",
+      "",
+      "<script setup lang=\"ts\">",
+      "import { ${TM_FILENAME_BASE/(.*)Table/${1:/camelcase}/}Crud } from \"../../../api/${TM_FILENAME_BASE/(.*)Table/${1:/camelcase}/}\";",
+      "import CrudTable, { Header } from \"../../../components/CrudTable.vue\";",
+      "",
+      "const headers: Header[] = [{key: \"$2\", value: \"$3\"}];",
+      "</script>"
+    ],
+    "description": "Generate CrudTable template"
+  },
+  "Generate CrudForm": {
+    "scope": "javascript,typescript,html,vue",
+    "prefix": "crudForm",
+    "body": [
+      "<template>",
+      "<CrudForm",
+      ":load-data=\"loadData\"",
+      ":submit-form=\"submitForm\"",
+      ":is-update-button-disabled=\"isUpdateButtonDisabled\"",
+      ":handle-delete=\"handleDelete\"",
+      ":is-form-loading=\"isFormLoading\"",
+      "title=\"$1\"",
+      "goBack-button-text=\"$2\"",
+      "delete-modal-title=\"$3\"",
+      ":amount-inputs-loading=\"$4\"",
+      ">",
+      "<div class=\"flex w-full max-w-xs flex-col gap-10\">",
+      "",
+      "</div>",
+      "</CrudForm>",
+      "</template>",
+      "",
+      "<script setup lang=\"ts\">",
+      "import { Ref, ref } from \"vue\";",
+      "",
+      "import { ${TM_FILENAME_BASE/(.*)Form/${1:/camelcase}/}Crud } from \"../../../api/${TM_FILENAME_BASE/(.*)Form/${1:/camelcase}/}\";",
+      "import { CreateRequest, UpdateRequest } from \"../../../api/models/${TM_FILENAME_BASE/(.*)Form/${1:/camelcase}/}\";",
+      "import CrudForm from \"../../../components/CrudForm.vue\";",
+      "import InputValue from \"../../../components/InputValue.vue\";",
+      "import { useCrudForm } from \"../../../composables/useCrudForm\";",
+      "",
+      "type Data = { [Key in keyof CreateRequest]: Ref<CreateRequest[Key]> } & {",
+      "[Key in keyof UpdateRequest]: Ref<UpdateRequest[Key]>;",
+      "};",
+      "",
+      "const data: Data = {",
+      "$5:ref()",
+      "};",
+      "",
+      "const {",
+      "loadData,",
+      "handleDelete,",
+      "isFormLoading,",
+      "formUserInteraction,",
+      "formErrors,",
+      "validateFormField,",
+      "submitForm,",
+      "isUpdateButtonDisabled,",
+      "} = useCrudForm<CreateRequest, UpdateRequest, keyof Data>({",
+      "crud: ${TM_FILENAME_BASE/(.*)Form/${1:/camelcase}/}Crud,",
+      "data,",
+      "useFormFields: {",
+      "$5: { value: data.$5, validation: \"$6\" },",
+      "},",
+      "createFields:ref({",
+      "$5: data.$5",
+      "}),",
+      "updateFields:ref({",
+      "$5: data.$5",
+      "}),",
+      "});",
+      "</script>"
+    ],
+    "description": "Generate CrudForm template"
+  },
+  "Generate Button": {
+    "scope": "html",
+    "prefix": "button",
+    "body": ["<Button>$1</Button>"],
+    "description": "Generate Button"
+  },
+  "Generate InputValue": {
+    "scope": "html",
+    "prefix": "inputValue",
+    "body": [
+      "<InputValue",
+      "id=\"$1\"",
+      "v-model=\"$2\"",
+      "label=\"$3\"",
+      "placeholder=\"$4\"",
+      ":error-message=\"formErrors.$2\"",
+      ":validate-on-user-interaction=\"formUserInteraction.$2\"",
+      "@validate=\"validateFormField('$2')\"",
+      "/>"
+    ],
+    "description": "Generate InputValue"
+  },
+  "Generate InputSelect": {
+    "scope": "html",
+    "prefix": "inputSelect",
+    "body": [
+      "<InputSelect",
+      "id=\"$1\"",
+      "v-model=\"$2\"",
+      "label=\"$3\"",
+      ":options=\"$4\"",
+      ":error-message=\"formErrors.$2\"",
+      ":validate-on-user-interaction=\"formUserInteraction.$2\"",
+      "@validate=\"validateFormField('$2')\"",
+      "/>"
+    ],
+    "description": "Generate InputSelect"
+  },
+  "Generate InputCheckbox": {
+    "scope": "html",
+    "prefix": "inputCheckbox",
+    "body": [
+      "<InputCheckbox",
+      "id=\"$1\"",
+      "v-model=\"$2\"",
+      "label=\"$3\"",
+      ":error-message=\"formErrors.$2\"",
+      ":validate-on-user-interaction=\"formUserInteraction.$2\"",
+      "@validate=\"validateFormField('$2')\"",
+      "/>"
+    ],
+    "description": "Generate InputCheckbox"
+  },
+  "Generate InputCheckboxGroup": {
+    "scope": "html",
+    "prefix": "inputCheckboxGroup",
+    "body": [
+      "<InputCheckboxGroup",
+      "id=\"$1\"",
+      "v-model=\"$2\"",
+      "label=\"$3\"",
+      ":options=\"$4\"",
+      ":error-message=\"formErrors.$2\"",
+      ":validate-on-user-interaction=\"formUserInteraction.$2\"",
+      "@validate=\"validateFormField('$2')\"",
+      "/>"
+    ],
+    "description": "Generate InputCheckboxGroup"
+  },
+  "Generate InputRadio": {
+    "scope": "html",
+    "prefix": "inputRadio",
+    "body": [
+      "<InputRadio",
+      "id=\"$1\"",
+      "v-model=\"$2\"",
+      "label=\"$3\"",
+      ":options=\"$4\"",
+      ":error-message=\"formErrors.$2\"",
+      ":validate-on-user-interaction=\"formUserInteraction.$2\"",
+      "@validate=\"validateFormField('$2')\"",
+      "/>"
+    ],
+    "description": "Generate InputRadio"
+  },
+  "Generate Adm Route": {
+    "scope": "typescript",
+    "prefix": "routeAdm",
+    "body": [
+      "{",
+      "path: \"$1\",",
+      "name: \"$2\",",
+      "component: () => import(\"../views/admin/$3.vue\"),",
+      "meta: { requiresAuth: true, priority: $4 }",
+      "},"
+    ],
+    "description": "Generate Adm Route"
+  },
+  "Generate User Route": {
+    "scope": "typescript",
+    "prefix": "routeUser",
+    "body": [
+      "{",
+      "path: \"$1\",",
+      "name: \"$2\",",
+      "component: () => import(\"../views/user/$3.vue\"),",
+      "meta: { requiresAuth: true, priority: $4 }",
+      "},"
+    ],
+    "description": "Generate User Route"
+  },
+  "Generate NavbarVertical Item": {
+    "scope": "typescript",
+    "prefix": "navItem",
+    "body": ["{", "path: \"$1\",", "name: \"$2\",", "icon: \"$3\",", "paths:[\"$1\"$4]", "},"],
+    "description": "Generate NavbarVertical Item"
+  }
+}

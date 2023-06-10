@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "jcbuisson.vue",
+    "johnsoncodehk.volar",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+    "naumovs.color-highlight",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "mhutchie.git-graph"
+  ]
+}
