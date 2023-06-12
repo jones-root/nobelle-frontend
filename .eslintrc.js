@@ -16,6 +16,7 @@ module.exports = {
     "prettier",
   ],
   rules: {
+    "@typescript-eslint/no-explicit-any": "off",
     "vue/multi-word-component-names": "off",
     "padding-line-between-statements": [
       "error",
