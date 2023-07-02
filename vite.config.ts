@@ -7,7 +7,16 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
-    plugins: [vue(), eslintPlugin()],
+    plugins: [
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => ["navbar"].includes(tag),
+          },
+        },
+      }),
+      eslintPlugin(),
+    ],
     server: {
       host: "0.0.0.0",
     },

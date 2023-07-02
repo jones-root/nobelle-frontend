@@ -28,8 +28,8 @@ module.exports = {
       "scrollbar-thumb": "var(--scrollbar-thumb)",
     },
     fontFamily: {
-      primary: "Roboto, Helvetica, Arial, sans-serif",
-      secondary: "Montserrat, Helvetica, Arial, sans-serif",
+      primary: "Marcellus SC, Roboto, Helvetica, Arial, sans-serif",
+      secondary: "Mulish, Montserrat, Helvetica, Arial, sans-serif",
     },
     fontSize: {
       xs: ".75rem",

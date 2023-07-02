@@ -24,6 +24,7 @@
     "@nestjsx/crud-request": "^5.0.0-alpha.3",
     "axios": "^0.26.0",
     "html2canvas": "^1.4.1",
+    "jquery": "^3.7.0",
     "jspdf": "^2.5.1",
     "maska": "^1.5.0",
     "material-icons": "^1.10.7",
@@ -38,10 +39,12 @@
     "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.0.12",
     "vue-toastification": "^2.0.0-rc.5",
+    "vue-waypoint": "^4.2.5",
     "xlsx": "^0.18.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.16",
     "@types/node": "^17.0.21",
     "@types/quill": "^2.0.9",
     "@types/uuid": "^8.3.4",
