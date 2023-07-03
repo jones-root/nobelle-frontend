@@ -3,6 +3,8 @@ module.exports = {
   theme: {
     colors: {
       transparent: "transparent",
+      "pure-white": "var(--pure-white)",
+      "pure-black": "var(--pure-black)",
       white: "var(--white)",
       black: "var(--black)",
       gray: "var(--gray)",
