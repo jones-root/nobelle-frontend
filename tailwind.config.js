@@ -65,8 +65,11 @@ module.exports = {
       minWidth: {
         button: "16rem",
       },
+      height: {
+        button: "4rem",
+      },
       minHeight: {
-        button: "2.75rem",
+        button: "4rem",
       },
       letterSpacing: {
         wide: ".0125em",
