@@ -49,6 +49,7 @@ module.exports = {
     borderRadius: {
       none: "0",
       tiny: "2px",
+      xs: "4px",
       sm: "6px",
       md: "12px",
       DEFAULT: "24px",
@@ -58,6 +59,7 @@ module.exports = {
     extend: {
       spacing: {
         "navbar-vertical": "18rem",
+        navbar: "var(--navbar-height)",
       },
       maxWidth: {
         button: "16rem",
@@ -66,9 +68,12 @@ module.exports = {
         button: "16rem",
       },
       height: {
+        "minor-button": "3rem",
         button: "4rem",
+        navbar: "var(--navbar-height)",
       },
       minHeight: {
+        "minor-button": "3rem",
         button: "4rem",
       },
       letterSpacing: {
@@ -82,6 +87,9 @@ module.exports = {
         "input-width": "1px",
         2.5: "2.5px",
         3: "3px",
+      },
+      screens: {
+        xs: "384px",
       },
     },
   },
