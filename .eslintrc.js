@@ -17,7 +17,12 @@ module.exports = {
     "plugin:vue/vue3-recommended",
     "prettier",
   ],
-  ignorePatterns: ["./public/mockServiceWorker.js"],
+  ignorePatterns: ["./public/mockServiceWorker.js", "**/*.min.js"],
+  globals: {
+    $: "readonly",
+    jQuery: "readonly",
+    Waypoint: "readonly",
+  },
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
