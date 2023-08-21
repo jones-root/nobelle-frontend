@@ -26,6 +26,7 @@ module.exports = {
       error: "var(--error)",
       success: "var(--success)",
       info: "var(--info)",
+      link: "var(--link)",
       "scrollbar-track": "var(--scrollbar-track)",
       "scrollbar-thumb": "var(--scrollbar-thumb)",
     },
