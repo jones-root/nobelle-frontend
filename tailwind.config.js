@@ -70,12 +70,12 @@ module.exports = {
       },
       height: {
         "minor-button": "3rem",
-        button: "4rem",
+        button: "3.5rem",
         navbar: "var(--navbar-height)",
       },
       minHeight: {
         "minor-button": "3rem",
-        button: "4rem",
+        button: "3.5rem",
       },
       letterSpacing: {
         wide: ".0125em",
