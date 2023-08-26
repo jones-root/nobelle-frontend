@@ -44,6 +44,7 @@ module.exports = {
         alphabetize: { order: "asc", ignoreCase: true },
       },
     ],
+    "vue/no-v-html": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {
