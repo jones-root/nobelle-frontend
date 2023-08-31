@@ -26,6 +26,7 @@ module.exports = {
       error: "var(--error)",
       success: "var(--success)",
       info: "var(--info)",
+      link: "var(--link)",
       "scrollbar-track": "var(--scrollbar-track)",
       "scrollbar-thumb": "var(--scrollbar-thumb)",
     },
@@ -69,12 +70,12 @@ module.exports = {
       },
       height: {
         "minor-button": "3rem",
-        button: "4rem",
+        button: "3.5rem",
         navbar: "var(--navbar-height)",
       },
       minHeight: {
         "minor-button": "3rem",
-        button: "4rem",
+        button: "3.5rem",
       },
       letterSpacing: {
         wide: ".0125em",

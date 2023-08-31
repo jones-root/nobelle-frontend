@@ -27,6 +27,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "vue/multi-word-component-names": "off",
+    "@typescript-eslint/no-shadow": ["error"],
     "padding-line-between-statements": [
       "error",
       { blankLine: "always", prev: "*", next: "return" },
@@ -43,6 +44,7 @@ module.exports = {
         alphabetize: { order: "asc", ignoreCase: true },
       },
     ],
+    "vue/no-v-html": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {
