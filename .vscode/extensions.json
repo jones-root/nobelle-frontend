@@ -1,7 +1,6 @@
 {
   "recommendations": [
-    "jcbuisson.vue",
-    "johnsoncodehk.volar",
+    "Vue.volar",
     "bradlc.vscode-tailwindcss",
     "csstools.postcss",
     "naumovs.color-highlight",
@@ -9,6 +8,13 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "editorconfig.editorconfig",
-    "mhutchie.git-graph"
+    "mhutchie.git-graph",
+    "oderwat.indent-rainbow",
+    "atlassian.atlascode",
+    "cpylua.language-postcss",
+    "PKief.material-icon-theme",
+    "Gruntfuggly.todo-tree",
+    "ChakrounAnas.turbo-console-log",
+    "sdras.vue-vscode-snippets"
   ]
 }
