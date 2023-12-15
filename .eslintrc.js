@@ -24,6 +24,7 @@ module.exports = {
     Waypoint: "readonly",
   },
   rules: {
+    "vue/no-mutating-props": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "vue/multi-word-component-names": "off",
