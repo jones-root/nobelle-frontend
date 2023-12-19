@@ -62,6 +62,8 @@ module.exports = {
       spacing: {
         "navbar-vertical": "18rem",
         navbar: "var(--navbar-height)",
+        "app-horizontal-padding": "var(--app-horizontal-padding)",
+        "app-mobile-horizontal-padding": "var(--app-mobile-horizontal-padding)",
       },
       maxWidth: {
         button: "16rem",

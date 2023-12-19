@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite --force",
     "clear-cache": "rimraf ./node_modules/.vite",
-    "no-cache-dev": "npm run clear-cache && npm run dev",
+    "dev:clear-cache": "npm run clear-cache && npm run dev",
     "serve": "vite --force",
     "serve:user": "cross-env VITE_PROJECT_TYPE=user vite --force",
     "serve:admin": "cross-env VITE_PROJECT_TYPE=admin vite --force",
