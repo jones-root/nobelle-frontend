@@ -23,6 +23,7 @@ module.exports = {
       "input-border-focus": "var(--input-border-focus)",
       "input-scrollbar": "var(--input-scrollbar)",
       "input-misc-background": "var(--input-misc-background)",
+      neutral: "var(--neutral)",
       placeholder: "var(--placeholder)",
       error: "var(--error)",
       success: "var(--success)",
