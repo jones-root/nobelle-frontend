@@ -9,6 +9,7 @@ module.exports = {
       black: "var(--black)",
       gray: "var(--gray)",
       primary: "var(--primary)",
+      "stronger-primary": "var(--stronger-primary)",
       secondary: "var(--secondary)",
       "stronger-secondary": "var(--stronger-secondary)",
       tertiary: "var(--tertiary)",
