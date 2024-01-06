@@ -113,6 +113,22 @@
     ],
     "description": "Generate InputValue"
   },
+  "Generate InputTextArea": {
+    "scope": "html",
+    "prefix": "inputTextArea",
+    "body": [
+      "<InputTextArea",
+      "id=\"$1\"",
+      "v-model=\"$2\"",
+      "label=\"$3\"",
+      "placeholder=\"$4\"",
+      ":error-message=\"formErrors.$2\"",
+      ":validate-on-user-interaction=\"formUserInteraction.$2\"",
+      "@validate=\"validateFormField('$2')\"",
+      "/>"
+    ],
+    "description": "Generate InputValue"
+  },
   "Generate InputSelect": {
     "scope": "html",
     "prefix": "inputSelect",
