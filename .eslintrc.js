@@ -21,7 +21,7 @@ module.exports = {
   globals: {
     $: "readonly",
     jQuery: "readonly",
-    Waypoint: "readonly",
+    Card: "readonly",
   },
   rules: {
     "vue/no-mutating-props": "off",
