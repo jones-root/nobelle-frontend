@@ -23,6 +23,7 @@
     "*.{js,jsx,ts,tsx,vue}": "eslint"
   },
   "dependencies": {
+    "@chenfengyuan/vue-barcode": "^2.0.2",
     "@nestjsx/crud-request": "^5.0.0-alpha.3",
     "@sentry/vue": "^7.86.0",
     "axios": "^0.26.0",

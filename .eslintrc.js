@@ -21,6 +21,7 @@ module.exports = {
   globals: {
     $: "readonly",
     jQuery: "readonly",
+    JQuery: "readonly",
     Card: "readonly",
   },
   rules: {
