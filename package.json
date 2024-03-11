@@ -23,6 +23,7 @@
     "*.{js,jsx,ts,tsx,vue}": "eslint"
   },
   "dependencies": {
+    "@chenfengyuan/vue-barcode": "^2.0.2",
     "@nestjsx/crud-request": "^5.0.0-alpha.3",
     "@sentry/vue": "^7.86.0",
     "axios": "^0.26.0",
@@ -45,7 +46,7 @@
     "uuid": "^8.3.2",
     "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.25",
-    "vue-currency-input": "^2.4.0",
+    "vue-currency-input": "^3.0.5",
     "vue-multiselect": "^3.0.0-alpha.2",
     "vue-photo-zoom-pro": "^3.0.1",
     "vue-router": "^4.0.12",

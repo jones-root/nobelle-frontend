@@ -87,7 +87,6 @@ module.exports = {
       },
       backgroundImage: {
         "icon-check": "url('/src/assets/icons/check.svg')",
-        "background-header": "url('/src/assets/background_header.jpg')",
       },
       borderWidth: {
         "input-width": "1px",
