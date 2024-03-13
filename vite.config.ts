@@ -11,13 +11,7 @@ export default ({ mode }) => {
       sourcemap: true,
     },
     plugins: [
-      vue({
-        template: {
-          compilerOptions: {
-            isCustomElement: (tag) => ["navbar"].includes(tag),
-          },
-        },
-      }),
+      vue(), //
       eslintPlugin(),
     ],
     server: {
