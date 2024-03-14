@@ -86,7 +86,7 @@ module.exports = {
         wide: ".0125em",
       },
       backgroundImage: {
-        "icon-check": "url('/src/assets/icons/check.svg')",
+        "icon-check": "url('/assets/icons/check.svg')",
       },
       borderWidth: {
         "input-width": "1px",
