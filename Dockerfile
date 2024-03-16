@@ -21,7 +21,7 @@ COPY --from=node-stage /usr/app/dist /usr/app/dist
 WORKDIR /usr/app
 RUN if [[ -n "$SENTRY_DSN" ]]; then \
 	sentry-cli releases new $GIT_COMMIT && \
-	sentry-cli releases set-commits $GIT_COMMIT --auto --ignore-empty && \
+	sentry-cli releases set-commits $GIT_COMMIT --auto --ignore-missing && \
 	sentry-cli releases files $GIT_COMMIT upload-sourcemaps --ext ts --ext js --ext map ./  && \
 	sentry-cli releases finalize $GIT_COMMIT; \
 	else echo "Sentry DSN not configured"; fi
