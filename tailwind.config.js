@@ -27,6 +27,8 @@ module.exports = {
       neutral: "var(--neutral)",
       placeholder: "var(--placeholder)",
       error: "var(--error)",
+      "error-weaker": "var(--error-weaker)",
+      "error-secondary": "var(--error-secondary)",
       success: "var(--success)",
       info: "var(--info)",
       link: "var(--link)",
