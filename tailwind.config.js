@@ -25,6 +25,7 @@ module.exports = {
       "input-scrollbar": "var(--input-scrollbar)",
       "input-misc-background": "var(--input-misc-background)",
       neutral: "var(--neutral)",
+      "lighter-neutral": "var(--lighter-neutral)",
       placeholder: "var(--placeholder)",
       error: "var(--error)",
       "error-weaker": "var(--error-weaker)",
