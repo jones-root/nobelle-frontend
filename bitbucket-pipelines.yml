@@ -24,6 +24,7 @@ definitions:
           - apk update && apk add gettext
           - /usr/bin/envsubst < .env.template > .env
           - /usr/bin/envsubst '$BITBUCKET_COMMIT' < nginx.template.conf > nginx.conf
+          - mv ./robots/$PROJECT_TYPE.txt ./public/robots.txt
           - export DOCKER_BUILDKIT=0
           - *set-gcloud-project
           # Extract Google Cloud API Key

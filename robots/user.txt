@@ -1,0 +1,19 @@
+User-agent: *
+Disallow: /busca/
+Disallow: /redefinir-senha/
+Disallow: /404/
+
+Disallow: /minha-conta/
+Disallow: /meus-pedidos/
+Disallow: /favoritos/
+Disallow: /enderecos/
+Disallow: /meus-cartoes/
+Disallow: /alterar-senha/
+
+Disallow: /checkout/
+Disallow: /checkout/envio/
+Disallow: /checkout/finalizar/
+Disallow: /pedido-realizado/
+Disallow: /mockServiceWorker.js
+
+# Sitemap: Add absolute URL to one or more sitemaps. Can be from any domain.
