@@ -5,6 +5,7 @@
     "dev": "vite --force",
     "clear-cache": "rimraf ./node_modules/.vite",
     "dev:clear-cache": "npm run clear-cache && npm run dev",
+    "docker": "docker-compose up",
     "serve": "vite --force",
     "serve:user": "cross-env VITE_PROJECT_TYPE=user vite --force",
     "serve:admin": "cross-env VITE_PROJECT_TYPE=admin vite --force",
