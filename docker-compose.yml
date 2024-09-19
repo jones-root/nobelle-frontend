@@ -1,0 +1,10 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./dist:/usr/share/nginx/html
+      - ./nginx.template.conf:/etc/nginx/templates/default.conf.template
+    restart: on-failure
+    env_file: .env
+    ports:
+      - 3000:8080
