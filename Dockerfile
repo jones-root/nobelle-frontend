@@ -28,7 +28,7 @@ RUN if [[ -n "$SENTRY_DSN" ]]; then \
 
 FROM nginx
 
-COPY --from=node-stage /usr/app/dist /html
+COPY --from=node-stage /usr/app/dist /usr/share/nginx/html
 COPY ./nginx.conf /etc/nginx/conf.d/
 RUN rm /etc/nginx/conf.d/default.conf
 
