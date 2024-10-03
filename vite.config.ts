@@ -8,7 +8,7 @@ export default ({ mode }) => {
 
   return defineConfig({
     build: {
-      sourcemap: true,
+      sourcemap: process.env.VITE_ENVIRONMENT !== "prod",
     },
     plugins: [
       vue(), //
