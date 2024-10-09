@@ -37,7 +37,7 @@ module.exports = {
       "scrollbar-thumb": "var(--scrollbar-thumb)",
     },
     fontFamily: {
-      primary: "Marcellus SC, Roboto, Helvetica, Arial, sans-serif",
+      primary: "Unbounded, Marcellus SC, Roboto, Helvetica, Arial, sans-serif",
       secondary: "Mulish, Montserrat, Helvetica, Arial, sans-serif",
     },
     fontSize: {
